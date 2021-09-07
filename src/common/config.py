@@ -15,7 +15,10 @@ MAX_SPAWN = 5
 SPAWN_TIME = 3000
 
 # speed
-SPEEDS = [1, 2, 3, 4, 5, 6]
+SPEEDS = [2, 3, 4, 5, 6]
 
 # spawn positions from top left
-SPAWN_POSITIONS = [(100, 100), (200, 250), (650, 300), (322, 345), (800, 100), (900, 50)]
+SPAWN_POSITIONS = [(163, 259), (294, 290), (196, 241), (558, 220), (670, 216), (952, 315),
+                   (1030, 281), (1086, 365), (328, 518), (433, 461), (569, 532), (144, 655),
+                   (307, 683), (880, 577), (926, 581), (1088, 588)]
+SPAWN_POSITIONS = list(map(lambda x: (int(0.8*x[0]), int(0.8*x[1])), SPAWN_POSITIONS))

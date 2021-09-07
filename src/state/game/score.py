@@ -10,9 +10,9 @@ class Score(pg.sprite.Sprite):
         self._update_score()
 
     def _update_score(self):
-        font = pg.font.Font(None, 50)
-        self.image = font.render("Score: " + str(self.score), 1, (255, 255, 255))
-        self.rect = self.image.get_rect(bottomright=(SCREEN_WIDTH, SCREEN_HEIGHT))
+        font = pg.font.Font(None, 60)
+        self.image = font.render("Score: " + str(self.score), 1, (230, 9, 9))
+        self.rect = self.image.get_rect(bottomright=(SCREEN_WIDTH - 10, SCREEN_HEIGHT - 5))
 
     def increase_score(self, increment):
         if self.score + increment >= 0:

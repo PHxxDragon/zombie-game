@@ -1,3 +1,5 @@
+from typing import Dict
+
 from src.state.state_machine import State
 from src.common.resources_manager import *
 
@@ -5,12 +7,13 @@ from src.state.game.pointer import Pointer
 from src.state.game.score import Score
 from src.state.game.slime import SlimeSpawner
 from src.state.game.background import Background
+from src.state.game.music import Music
+from src.state.game.sound import PlaySound
 
 
 class Game(State):
     def __init__(self):
         super().__init__()
-        pg.mouse.set_visible(False)
         self.name = "GAME"
         self.group_all = pg.sprite.Group()
         self.UI = pg.sprite.Group()
@@ -20,6 +23,12 @@ class Game(State):
         self.group_all.add(self.background)
         self.UI.add(self.score, self.pointer)
         self.slime_spawner = SlimeSpawner(self)
+        self.music = Music()
+        self.sound = PlaySound()
+
+    def startup(self, now, to_persist: Dict):
+        pg.mouse.set_visible(False)
+        self.music.start()
 
     def accept_events(self, events):
         for event in events:

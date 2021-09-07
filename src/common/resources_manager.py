@@ -15,6 +15,29 @@ _SLIME_RIGHT = None
 _SLIME_LEFT = None
 _SLIME_DEATH = None
 _POINTER_SURFACE = None
+_HIT_SOUND = None
+_MISS_SOUND = None
+
+
+def _load_sound():
+    global _HIT_SOUND
+    global _MISS_SOUND
+    _HIT_SOUND = pygame.mixer.Sound(os.path.join(RESOURCE_DIR, "music/hit.ogg"))
+    _MISS_SOUND = pygame.mixer.Sound(os.path.join(RESOURCE_DIR, "music/miss1.wav"))
+    _HIT_SOUND.set_volume(0.7)
+    _MISS_SOUND.set_volume(0.5)
+
+
+def get_hit_sound():
+    if _HIT_SOUND is None:
+        _load_sound()
+    return _HIT_SOUND
+
+
+def get_miss_sound():
+    if _MISS_SOUND is None:
+        _load_sound()
+    return _MISS_SOUND
 
 
 def _load_image(name, alpha=False, color_key=None):
@@ -144,3 +167,6 @@ def get_slime_surfaces():
         _load_slime()
     return [_SLIME_FRONT, _SLIME_BACK, _SLIME_LEFT, _SLIME_RIGHT, _SLIME_DEATH]
 
+
+def get_music_filename():
+    return os.path.join(RESOURCE_DIR, "music/background.ogg")

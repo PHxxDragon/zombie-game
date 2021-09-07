@@ -1,4 +1,4 @@
-import random
+import pygame as pg
 
 from src.common.config import *
 from src.common.resources_manager import *
@@ -16,7 +16,7 @@ class Slime(pg.sprite.Sprite):
         self.animations = None
         self.image = None
         self._init_animations()
-        self.rect = self.image.get_rect(topleft=init_pos)
+        self.rect = self.image.get_rect(center=init_pos)
         self.state = Slime.WALKING
         self.direction = None
         self.life_span = int(spawn_time / DELTA_TIME)
@@ -48,6 +48,7 @@ class Slime(pg.sprite.Sprite):
         if self.state != Slime.DYING and self.rect.collidepoint(mouse_pos):
             self._change_state(Slime.DYING)
             self.game.score.increase_score(1)
+            self.game.sound.play_hit()
             return True
 
     def set_pos(self, pos):
@@ -83,6 +84,7 @@ class SlimeSpawner:
         for zombie in self.group_zombie.sprites():
             killed = killed or zombie.check_and_kill(mouse_pos)
         if not killed:
+            self.game.sound.play_miss()
             self.game.score.increase_score(-1)
 
     def update(self, now, *args):
